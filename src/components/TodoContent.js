@@ -24,7 +24,7 @@ function TodoContent(props) {
 
   return (
     <div className="d-flex align-items-center">
-      <span className="flex-fill" role="button" onCLick={props.openEdit}>
+      <span className="flex-fill" role="button" onClick={props.openEdit}>
         {props.todo.title}
       </span>
       <div className="btn-group">

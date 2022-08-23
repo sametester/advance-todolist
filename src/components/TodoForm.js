@@ -9,6 +9,9 @@ function TodoForm(props) {
     // validate first
 
     // success validation
+    // if create mode
+    // else edit mode
+
     try {
       const res = await axios.post('http://localhost:8080/todos', {
         title,
