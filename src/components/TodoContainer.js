@@ -34,14 +34,6 @@ function TodoContainer(props) {
     return () => clearTimeout(timerId);
   }, [searchText, searchStatus, sort, pageLimit, currentPage]);
 
-  useEffect(() => {
-    setSearchText('');
-    setSearchStatus('');
-    setSort('');
-    setPageLimit(5);
-    setCurrentPage(1);
-  }, [props.trigger]);
-
   const numPage = Math.ceil(props.total / pageLimit);
 
   return (
@@ -70,18 +62,14 @@ function TodoContainer(props) {
       <TodoList todos={props.todos} fetchTodos={props.fetchTodos} />
       <div className="my-2 d-flex justify-content-between align-items-center">
         <small className="text-muted">
-          {/* cp: 1, pageLimit 5 1 to 5 */}
-          {/* cp: 2, pageLimit 5 6 to 10 */}
-          {/* cp: 3, pageLimit 5 11 to 14 */}
           Showing {(currentPage - 1) * pageLimit + 1} to{' '}
           {currentPage === numPage ? props.total : currentPage * pageLimit} of{' '}
           {props.total} entries
         </small>
-        +
         <Pagination
           numPage={numPage}
           currentPage={currentPage}
-          onCLick={page => setCurrentPage(page)}
+          onClick={page => setCurrentPage(page)}
         />
       </div>
     </Fragment>

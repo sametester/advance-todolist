@@ -1,5 +1,5 @@
 function Pagination(props) {
-  // numPage : 4 => [1, 2, 3, 4]
+  // numPage:4 => [1, 2, 3, 4]
   return (
     <ul className="pagination pagination-sm mb-0">
       <li className="page-item">
@@ -20,7 +20,6 @@ function Pagination(props) {
           </button>
         </li>
       ))}
-
       <li className="page-item">
         <button
           className={`page-link ${
