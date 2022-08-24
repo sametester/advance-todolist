@@ -1,16 +1,14 @@
+import { useContext } from 'react';
+import { TodoContext } from '../contexts/TodoContext';
 import TodoItem from './TodoItem';
 
-function TodoList(props) {
+function TodoList() {
+  const ctx = useContext(TodoContext);
   return (
     <ul className="list-group my-2">
-      {props.todos.map(item => (
-        <TodoItem key={item.id} todo={item} fetchTodos={props.fetchTodos} />
+      {ctx.todos.map(item => (
+        <TodoItem key={item.id} todo={item} />
       ))}
-      {/* <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem /> */}
     </ul>
   );
 }

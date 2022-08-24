@@ -1,34 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { TodoContext } from '../contexts/TodoContext';
 
-function TodoForm(props) {
-  const [title, setTitle] = useState(props.initialValue || '');
+function TodoForm() {
+  const [title, setTitle] = useState('');
+  const ctx = useContext(TodoContext);
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    // validate first
-
-    // success validation
-    props.onSubmit(title);
+    ctx.createTodo(title);
     setTitle('');
-
-    // if create mode
-    // else edit mode
-    // try {
-    //   const res = await axios.post('http://localhost:8080/todos', {
-    //     title,
-    //     completed: false
-    //   });
-    //   props.fetchTodos();
-    //   setTitle('');
-    //   console.log(res.data);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-  };
-
-  const handleClickCancel = () => {
-    setTitle('');
-    props.onCancel?.();
   };
 
   return (
@@ -46,7 +26,7 @@ function TodoForm(props) {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          onClick={handleClickCancel}
+          onClick={() => setTitle('')}
         >
           <i className="fa-solid fa-xmark" />
         </button>

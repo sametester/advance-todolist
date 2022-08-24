@@ -1,38 +1,14 @@
-function Pagination(props) {
-  // numPage : 4 => [1, 2, 3, 4]
+function PageLimit() {
   return (
-    <ul className="pagination pagination-sm mb-0">
-      <li className="page-item">
-        <button
-          className={`page-link ${props.currentPage === 1 ? 'disabled' : ''}`}
-          onClick={() => props.onClick(props.currentPage - 1)}
-        >
-          <i className="fa-solid fa-angle-left small" />
-        </button>
-      </li>
-      {new Array(props.numPage).fill().map((_, i) => (
-        <li
-          className={`page-item ${props.currentPage === i + 1 ? 'active' : ''}`}
-          key={i}
-        >
-          <button className="page-link" onClick={() => props.onClick(i + 1)}>
-            {i + 1}
-          </button>
-        </li>
-      ))}
-
-      <li className="page-item">
-        <button
-          className={`page-link ${
-            props.currentPage === props.numPage ? 'disabled' : ''
-          }`}
-          onClick={() => props.onClick(props.currentPage + 1)}
-        >
-          <i className="fa-solid fa-angle-right small" />
-        </button>
-      </li>
-    </ul>
+    <div className="d-flex gap-2 align-items-center">
+      <small className="text-muted">Display</small>
+      <select className="form-select form-select-sm" style={{ width: '5rem' }}>
+        <option>5</option>
+        <option>10</option>
+        <option>25</option>
+      </select>
+    </div>
   );
 }
 
-export default Pagination;
+export default PageLimit;
