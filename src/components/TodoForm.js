@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 
 function TodoForm(props) {
   const [title, setTitle] = useState(props.initialValue || '');
@@ -8,18 +7,16 @@ function TodoForm(props) {
     e.preventDefault();
     // validate first
 
-    //*
     // success validation
     props.onSubmit(title);
     setTitle('');
+
     // if create mode
     // else edit mode
-    //*
-
     // try {
     //   const res = await axios.post('http://localhost:8080/todos', {
     //     title,
-    //     completed: false,
+    //     completed: false
     //   });
     //   props.fetchTodos();
     //   setTitle('');
