@@ -1,13 +1,17 @@
 import { useContext, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 
-function TodoForm() {
-  const [title, setTitle] = useState('');
+function TodoForm({ todo, closeEdit }) {
+  const [title, setTitle] = useState(todo?.title || '');
   const ctx = useContext(TodoContext);
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    ctx.createTodo(title);
+    if (todo) {
+      ctx.updateTodo({ title, completed: todo.completer }, todo.id);
+    } else {
+      ctx.createTodo(title);
+    }
     setTitle('');
   };
 
@@ -26,7 +30,10 @@ function TodoForm() {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          onClick={() => setTitle('')}
+          onClick={() => {
+            setTitle('');
+            closeEdit?.();
+          }}
         >
           <i className="fa-solid fa-xmark" />
         </button>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TodoContent from './TodoContent';
 import TodoForm from './TodoForm';
 
-function TodoItem({ todo, editingTodo, openEdit }) {
+function TodoItem({ todo, editingTodo, openEdit, closeEdit }) {
   const { completed, id } = todo;
 
   return (
@@ -12,7 +12,7 @@ function TodoItem({ todo, editingTodo, openEdit }) {
       }`}
     >
       {editingTodo.id === id ? (
-        <TodoForm />
+        <TodoForm todo={todo} closeEdit={closeEdit} />
       ) : (
         <TodoContent todo={todo} openEdit={openEdit} />
       )}
