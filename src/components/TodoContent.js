@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { DELETE_TODO } from '../actions/todoAction';
+import { DELETE_TODO, UPDATE_TODO } from '../actions/todoAction';
 import axios from '../config/axios';
 import { TodoContext } from '../contexts/TodoContext';
 
-function TodoContent({ todo: { title, completed, id } }) {
+function TodoContent({ todo: { title, completed, id }, openEdit }) {
   const ctx = useContext(TodoContext);
   const handleClickDelete = () => {
     axios
@@ -14,13 +14,25 @@ function TodoContent({ todo: { title, completed, id } }) {
       .catch(err => console.log(err));
   };
 
+  const handleCLickToggle = () => {
+    axios
+      .put('/todos/' + id, { title, completed: !completed })
+      .then(res => {
+        ctx.dispatch({ type: UPDATE_TODO, payload: { todo: res.data.todo } });
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className="d-flex align-items-center">
-      <span className="flex-fill" role="button">
+      <span className="flex-fill" role="button" onClick={openEdit}>
         {title}
       </span>
       <div className="btn-group">
-        <button className="btn btn-outline-secondary">
+        <button
+          className="btn btn-outline-secondary"
+          onClick={handleCLickToggle}
+        >
           <i className={`fa-solid fa-toggle-${completed ? 'on' : 'off'}`} />
         </button>
         <button
